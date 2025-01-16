@@ -4,7 +4,7 @@ cask "cpu-info" do
 
   url "https://github.com/kamgurgul/cpu-info/releases/download/jvm-#{version}/CPU-Info-macos-x64-#{version}.dmg"
   name "CPU-Info"
-  desc "CPU-Info provides information about device hardware and software"
+  desc "Provides information about device hardware and software"
   homepage "https://github.com/kamgurgul/cpu-info"
 
   livecheck do
@@ -13,10 +13,10 @@ cask "cpu-info" do
     strategy :github_releases do |json, regex|
       json.map do |release|
         next if release["draft"] || release["prerelease"]
-  
+
         match = release["tag_name"]&.match(regex)
         next if match.blank?
-  
+
         match[1]
       end
     end
@@ -26,9 +26,7 @@ cask "cpu-info" do
 
   app "CPU-Info.app"
 
-  zap trash: [
-    "~/Library/Preferences/CPU-Info",
-  ]
+  zap trash: "~/Library/Preferences/CPU-Info"
 
   caveats do
     requires_rosetta
